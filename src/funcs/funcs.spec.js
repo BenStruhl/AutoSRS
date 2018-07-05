@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { greet, bye } from "./funcs";
+import { greet, bye, rotate90, fs} from "./funcs";
 import env from "env";
 
 describe("funcs", () => {
@@ -9,6 +9,13 @@ describe("funcs", () => {
 
   it("says goodbye", () => {
     expect(bye()).to.equal("See ya!");
+  });
+
+  it("rotates the image 90 degrees", () => {
+      if(rotate90("./test_files/spiderCrab.jpg", "./test_files/spiderCrabTest.jpg"))
+        console.log(fs.readFileSync("./test_files/spiderCrabTest.jpg") === fs.readFileSync("./test_files/spiderCrabRotation.jpg"))
+        expect(fs.readFileSync("./test_files/spiderCrabTest.jpg"))
+        .to.equal(fs.readFileSync("./test_files/spiderCrabRotation.jpg"));
   });
 
   it("should load test environment variables", () => {

@@ -1,5 +1,5 @@
-const Jimp = require("jimp")
-const fs = require('fs');
+export const Jimp = require("jimp")
+export const fs = require('fs');
 
 
 export const greet = () => {
@@ -17,6 +17,7 @@ export const rotate90 = (path, end) => {
     lenna.rotate(90)
          .write(end); // save
   });
+  return true;
 };
 
 export const readDir = () => {
