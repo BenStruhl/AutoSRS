@@ -10,12 +10,12 @@ export const bye = () => {
   return "See ya!";
 };
 
-export const rotate90 = (path) => {
+export const rotate90 = (path, end) => {
 
   Jimp.read(path, function (err, lenna) {
     if (err) throw err;
     lenna.rotate(90)
-         .write(path); // save
+         .write(end); // save
   });
 };
 
