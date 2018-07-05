@@ -17,3 +17,15 @@ export const rotate = (path) => {
          .write(path); // save
   });
 };
+
+export const readDir = () => {
+  console.log("start");
+  const testFolder = '././test_files';
+  const fs = require('fs');
+
+  fs.readdirSync(testFolder).forEach(file => {
+    console.log(file);
+  })
+
+  console.log("done");
+};
