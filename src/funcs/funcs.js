@@ -1,4 +1,5 @@
 const Jimp = require("jimp")
+const fs = require('fs');
 
 
 export const greet = () => {
@@ -9,7 +10,7 @@ export const bye = () => {
   return "See ya!";
 };
 
-export const rotate = (path) => {
+export const rotate90 = (path) => {
 
   Jimp.read(path, function (err, lenna) {
     if (err) throw err;
@@ -21,7 +22,6 @@ export const rotate = (path) => {
 export const readDir = () => {
   console.log("start");
   const testFolder = '././test_files';
-  const fs = require('fs');
 
   fs.readdirSync(testFolder).forEach(file => {
     console.log(file);

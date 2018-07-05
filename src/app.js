@@ -25,7 +25,7 @@ const osMap = {
   darwin: "macOS",
   linux: "Linux"
 };
-
+rotate("/Users/benstruhl/Documents/Electronintro/AutoSRS/test_files/spiderCrab.jpg")
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
