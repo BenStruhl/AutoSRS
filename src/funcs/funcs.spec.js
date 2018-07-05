@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { greet, bye } from "./hello_world";
+import { greet, bye } from "./funcs";
 import env from "env";
 
 describe("hello world", () => {

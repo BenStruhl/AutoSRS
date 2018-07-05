@@ -10,7 +10,7 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet } from "./hello_world/hello_world";
+import { greet } from "./funcs/funcs";
 import env from "env";
 
 const app = remote.app;
