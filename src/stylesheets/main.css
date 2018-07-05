@@ -19,6 +19,12 @@ a {
   color: #cb3837;
 }
 
+#testButton {
+  align-items: center;
+  font-family: sans-serif;
+  background-color: #45b8b2;
+}
+
 .container {
   text-align: center;
 }
