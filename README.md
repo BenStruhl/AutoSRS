@@ -1,3 +1,6 @@
+# AutoSRS
+a Electron app to automate exporting X-Ray Images to SRS
+
 # electron-boilerplate
 
 A minimalistic boilerplate for [Electron runtime](http://electron.atom.io). Tested on Windows, macOS and Linux.  
