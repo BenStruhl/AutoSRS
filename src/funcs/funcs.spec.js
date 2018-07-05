@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { greet, bye } from "./funcs";
 import env from "env";
 
-describe("hello world", () => {
+describe("funcs", () => {
   it("greets", () => {
     expect(greet()).to.equal("Hello World!");
   });

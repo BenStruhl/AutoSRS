@@ -26,7 +26,6 @@ const osMap = {
   linux: "Linux"
 };
 
-document.querySelector("#testButton").addEventListener("click", rotate);
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
