@@ -10,7 +10,7 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet, rotate90} from "./funcs/funcs";
+import { greet, rotate90, readDir} from "./funcs/funcs";
 import env from "env";
 
 const app = remote.app;
@@ -26,6 +26,7 @@ const osMap = {
   linux: "Linux"
 };
 
+readDir();
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
