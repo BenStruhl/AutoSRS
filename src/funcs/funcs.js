@@ -22,11 +22,15 @@ export const rotate90 = (path, end) => {
 
 export const readDir = () => {
   console.log("start");
-  const testFolder = '././test_files';
+  const testFolder = './test_files';
 
-  fs.readdirSync(testFolder).forEach(file => {
-    console.log(file);
-  })
+  var files = fs.readdirSync(testFolder);
 
+  return files[1];
+  // for(var i in files){
+  //   return files[i];
+  // }
+
+  return testFolder;
   console.log("done");
 };

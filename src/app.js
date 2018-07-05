@@ -26,9 +26,8 @@ const osMap = {
   linux: "Linux"
 };
 
-readDir();
 document.querySelector("#app").style.display = "block";
-document.querySelector("#greet").innerHTML = greet();
+document.querySelector("#greet").innerHTML = readDir();
 document.querySelector("#os").innerHTML = osMap[process.platform];
 document.querySelector("#author").innerHTML = manifest.author;
 document.querySelector("#env").innerHTML = env.name;
