@@ -12,10 +12,31 @@ describe("funcs", () => {
   });
 
   it("rotates the image 90 degrees", () => {
+    function getBase64Image(img) {
+      // Create an empty canvas element
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+  
+      // Copy the image contents to the canvas
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+  
+      // Get the data-URL formatted image
+      // Firefox supports PNG and JPEG. You could check img.src to
+      // guess the original format, but be aware the using "image/jpg"
+      // will re-encode the image.
+      var dataURL = canvas.toDataURL("image/png");
+  
+      return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+      }
       if(rotate90("./test_files/spiderCrab.jpg", "./test_files/spiderCrabTest.jpg"))
-        console.log(fs.readFileSync("./test_files/spiderCrabTest.jpg") === fs.readFileSync("./test_files/spiderCrabRotation.jpg"))
-        expect(fs.readFileSync("./test_files/spiderCrabTest.jpg"))
-        .to.equal(fs.readFileSync("./test_files/spiderCrabRotation.jpg"));
+        var expected = new Image();
+        var test = new Image();
+        expected.src = "./test_files/spiderCrabRotation.jpg";
+        test.src = "./test_files/spiderCrabTest";
+        expect(getBase64Image(test))
+        .to.equal(getBase64Image(expected));
   });
 
   it("should load test environment variables", () => {
