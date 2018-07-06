@@ -12,7 +12,7 @@ export const exportToPaperPort = () => {
             var listOfXRays = readDir(file);
             for(var xRay of listOfXRays) {
                 if(isTif(xRay)) {
-                    
+                    // add more stuff
                 }
             }
         } 
