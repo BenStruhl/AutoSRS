@@ -1,6 +1,7 @@
 import { expect } from "chai";
-import { greet, bye, rotate90, fs} from "./funcs";
+import { greet, bye, rotate90, fs, readDir} from "./funcs";
 import env from "env";
+import { readdir } from "fs";
 
 describe("funcs", () => {
   it("greets", () => {
@@ -51,4 +52,9 @@ describe("funcs", () => {
     const b = { ...a, b: 2 };
     expect(b).to.eql({ a: 1, b: 2 });
   });
+
+  it("Corret List of Diretories", () => {
+    var a = readDir();
+    expect(a[0]).to.eql("spiderCrab.jpg");
+  })
 });
