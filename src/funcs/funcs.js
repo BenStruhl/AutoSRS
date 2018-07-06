@@ -35,13 +35,16 @@ export var readDir = () => {
 
 // Given a path to a file, renames the file by appending the parent folders
 // name and date to the front.
-export const appendParentNameDate = (path) => {
-  var parentName = path.dirname(filename).split(path.sep).pop()
-  var parentNameDecomp = parentName.split("_")
-  var newNameToAppend = ""
+export const appendParentNameDate = (pathGiven) => {
+  var parentName = path.dirname(pathGiven).split("/").pop();
+  var parentNameDotRemoved = parentName.split(".").shift()
+  var parentNameDecomp = parentNameDotRemoved.split("_");
+  console.log("parentName " + parentName);
+  var newNameToAppend = "";
   for(var i = 0; i < 3; i += 1) {
-    newNameToAppend += (parentNameDecomp.pop() + "_");
+    newNameToAppend += (parentNameDecomp.shift() + "_");
   }
-    fs.rename(path, path.dirname(path) + newNameToAppend + parentName );
-    return path.dirname(path) + newNameToAppend + parentName; 
+  var basename = path.basename(pathGiven)
+  fs.rename(basename, newNameToAppend + basename);
+  return  newNameToAppend + basename; 
 }

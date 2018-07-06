@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { greet, bye, rotate90, fs, readDir} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, appendParentNameDate} from "./funcs";
 import env from "env";
 import { readdir } from "fs";
 
@@ -38,6 +38,11 @@ describe("funcs", () => {
         test.src = "./test_files/spiderCrabTest";
         expect(getBase64Image(test))
         .to.equal(getBase64Image(expected));
+  });
+
+  it("should rename x-ray files to have paitent name and date taken", () => {
+    var path = "/Users/benstruhl/Documents/Electronintro/AutoSRS/test_files/BEN_STRUHL_06-16-20.12.12.12/spiderCrab.jpg"
+    expect(appendParentNameDate(path)).to.equal("BEN_STRUHL_06-16-20_spiderCrab.jpg")
   });
 
   it("should load test environment variables", () => {
