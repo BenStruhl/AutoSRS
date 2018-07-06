@@ -1,5 +1,6 @@
 export const Jimp = require("jimp")
 export const fs = require('fs');
+export const path = require("path")
 
 
 export const greet = () => {
@@ -34,3 +35,16 @@ export const readDir = () => {
   return testFolder;
   console.log("done");
 };
+
+// Given a path to a file, renames the file by appending the parent folders
+// name and date to the front.
+export const appendParentNameDate = (path) => {
+  var parentName = path.dirname(filename).split(path.sep).pop()
+  var parentNameDecomp = parentName.split("_")
+  var newNameToAppend = ""
+  for(var i = 0; i < 3; i += 1) {
+    newNameToAppend += (parentNameDecomp.pop() + "_");
+  }
+    fs.rename(path, path.dirname(path) + newNameToAppend + parentName );
+    return path.dirname(path) + newNameToAppend + parentName; 
+}
