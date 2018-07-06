@@ -20,16 +20,13 @@ export const rotate90 = (path, end) => {
   return true;
 };
 
-export const readDir = () => {
+export var readDir = () => {
   console.log("start");
   const testFolder = './test_files';
 
   var files = fs.readdirSync(testFolder);
 
-  return files[1];
-  // for(var i in files){
-  //   return files[i];
-  // }
+  return files;
 
   return testFolder;
   console.log("done");
