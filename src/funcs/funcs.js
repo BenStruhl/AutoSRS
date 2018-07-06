@@ -12,12 +12,12 @@ export const bye = () => {
 };
 
 //Rotates an image 90 degrees, returning true if succesful.
-export const rotate90 = (path, end) => {
+export const rotate90 = (path, newPath) => {
 
   Jimp.read(path, function (err, lenna) {
     if (err) throw err;
     lenna.rotate(90)
-         .write(end); // save
+         .write(newPath); // save
   });
   return true;
 };
@@ -58,5 +58,5 @@ export const appendParentNameDate = (pathGiven) => {
   var basename = path.basename(pathGiven);
   var pathName = parentNameRawList.join("/");
   fs.rename(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
-  return  newNameToAppend + basename; 
+  return  pathName + "/" + newNameToAppend + basename; 
 }
