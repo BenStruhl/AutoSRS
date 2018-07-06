@@ -1,5 +1,9 @@
 import { expect } from "chai";
+<<<<<<< HEAD
 import { greet, bye, rotate90, fs, readDir, appendParentNameDate} from "./funcs";
+=======
+import { greet, bye, rotate90, fs, readDir, isTif} from "./funcs";
+>>>>>>> 58444fa86c186ee4bbc7536d5a2257d332a1b785
 import env from "env";
 import { readdir } from "fs";
 
@@ -60,6 +64,16 @@ describe("funcs", () => {
 
   it("Correct List of Diretories", () => {
     var a = readDir();
-    expect(a[1]).to.eql("spiderCrab.jpg");
+    expect(a[a.length-3]).to.eql("spiderCrab.jpg");
+  })
+
+  it("Check tifs works", () =>{
+    var a = readDir();
+    var c = 0;
+    for(const b in a){
+      if(isTif(a[b]))
+        c++;
+    }
+    expect(c === 3);
   })
 });
