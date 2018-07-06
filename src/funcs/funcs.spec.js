@@ -58,11 +58,6 @@ describe("funcs", () => {
     expect(b).to.eql({ a: 1, b: 2 });
   });
 
-  it("Correct List of Diretories", () => {
-    var a = readDir();
-    expect(a[a.length-3]).to.eql("spiderCrab.jpg");
-  })
-
   it("Check tifs works", () =>{
     var a = readDir();
     var c = 0;
