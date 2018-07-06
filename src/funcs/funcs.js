@@ -47,7 +47,8 @@ export const isTif = (path) => {
 // Given a path to a file, renames the file by appending the parent folders
 // name and date to the front.
 export const appendParentNameDate = (pathGiven) => {
-  var parentName = path.dirname(pathGiven).split("/").pop();
+  var parentNameRawList = path.dirname(pathGiven).split("/");
+  var parentName = parentNameRawList.pop();
   var parentNameDotRemoved = parentName.split(".").shift();
   var parentNameDecomp = parentNameDotRemoved.split("_");
   var newNameToAppend = "";
@@ -55,9 +56,7 @@ export const appendParentNameDate = (pathGiven) => {
     newNameToAppend += (parentNameDecomp.shift() + "_");
   }
   var basename = path.basename(pathGiven);
-  var pathName = parentName.join("/");
-  console.log("OLD: " + pathName + basename);
-  console.log("NEW: " +  pathName + newNameToAppend + basename);
-  fs.rename(pathName + basename, pathName + newNameToAppend + basename);
+  var pathName = parentNameRawList.join("/");
+  fs.rename(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
   return  newNameToAppend + basename; 
 }
