@@ -31,6 +31,13 @@ export var readDir = () => {
   return files;
 };
 
+export var readDirFromPath = (path) => {
+
+  var files = fs.readdirSync(path);
+
+  return files;
+};
+
 //Determines if a given file is a bmp
 export const isTif = (path) => {
   const s = path.lengt - 4;
@@ -51,13 +58,7 @@ export const appendParentNameDate = (pathGiven) => {
   for(var i = 0; i < 3; i += 1) {
     newNameToAppend += (parentNameDecomp.shift() + "_");
   }
-<<<<<<< HEAD
   var basename = path.basename(pathGiven)
   fs.rename(basename, newNameToAppend + basename);
   return  newNameToAppend + basename; 
 }
-=======
-    fs.rename(path, path.dirname(path) + newNameToAppend + parentName );
-    return path.dirname(path) + newNameToAppend + parentName; 
-}
->>>>>>> 58444fa86c186ee4bbc7536d5a2257d332a1b785
