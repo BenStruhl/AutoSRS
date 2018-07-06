@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, isTif, appendParentNameDate} from "./funcs";
 import env from "env";
 import { readdir } from "fs";
 
