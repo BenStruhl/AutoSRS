@@ -1,7 +1,7 @@
 import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, fs} from "./funcs";
 
-export const Robot = require("robotjs");
-export const PrintJS = require("printjs");
+export const robot = require("robotjs");
+export const printJS = require("printJS");
 
 
 // exports all files in a specified folder to printport
@@ -23,10 +23,14 @@ export const exportToPaperPort = () => {
     }
 
     for(var file of listToExportToPaperPort) {
-        Robot.setKeyboardDelay(0)
-        Robot.setMouseDelay(0)
-        Robot.keyTap("command");
-        R
+        robot.setKeyboardDelay(0);
+        robot.setMouseDelay(0);
+        robot.keyTap("command");
+        robot.typeString("PaperPort");
+        robot.keyTap("enter")
+        for(var xRay in listToExportToPaperPort) {
+            printJS() 
+        }
     }
     // user robot.js to activate paperport 
     // for each name in the list
