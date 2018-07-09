@@ -29,8 +29,9 @@ export const exportToPaperPort = () => {
         robot.typeString("PaperPort");
         robot.keyTap("enter")
         for(var xRay in listToExportToPaperPort) {
-            printJS() 
+            printJS(xRay); 
         }
+        // Call 3rd part function
     }
     // user robot.js to activate paperport 
     // for each name in the list

@@ -13,7 +13,6 @@ export const bye = () => {
 
 //Rotates an image 90 degrees, returning true if succesful.
 export const rotate90 = (path, newPath) => {
-
   Jimp.read(path, function (err, lenna) {
     if (err) throw err;
     lenna.rotate(90)
@@ -24,15 +23,9 @@ export const rotate90 = (path, newPath) => {
 
 //Returns a list of all files in a given directory
 export var readDir = () => {
-  console.log("start");
   const testFolder = './test_files';
-
   var files = fs.readdirSync(testFolder);
-
   return files;
-
-  return testFolder;
-  console.log("done");
 };
 
 //Determines if a given file is a bmp
@@ -49,6 +42,7 @@ export const isTif = (path) => {
 export const appendParentNameDate = (pathGiven) => {
   var parentNameRawList = path.dirname(pathGiven).split("/");
   var parentName = parentNameRawList.pop();
+  parentNameRawList.push(parentName);
   var parentNameDotRemoved = parentName.split(".").shift();
   var parentNameDecomp = parentNameDotRemoved.split("_");
   var newNameToAppend = "";
@@ -57,6 +51,6 @@ export const appendParentNameDate = (pathGiven) => {
   }
   var basename = path.basename(pathGiven);
   var pathName = parentNameRawList.join("/");
-  fs.rename(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
+  fs.renameSync(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
   return  pathName + "/" + newNameToAppend + basename; 
 }

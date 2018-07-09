@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { greet, bye, rotate90, fs, readDir, isTif, appendParentNameDate} from "./funcs";
 import env from "env";
-import { readdir } from "fs";
 
 describe("funcs", () => {
   it("greets", () => {
@@ -41,8 +40,10 @@ describe("funcs", () => {
   });
 
   it("should rename x-ray files to have paitent name and date taken", () => {
-    var path = "/Users/benstruhl/Documents/Electronintro/AutoSRS/test_files/BEN_STRUHL_06-16-20.12.12.12/spiderCrab.jpg"
-    expect(appendParentNameDate(path)).to.equal("BEN_STRUHL_06-16-20_spiderCrab.jpg")
+    var path = "././test_files/BEN_STRUHL_06-16-20.12.12.12/spiderCrab.jpg"
+    var expectName = "././test_files/BEN_STRUHL_06-16-20.12.12.12/BEN_STRUHL_06-16-20_spiderCrab.jpg";
+    expect(appendParentNameDate(path)).to.equal(expectName);
+    fs.copyFileSync("././test_files/spiderCrab.jpg","././test_files/BEN_STRUHL_06-16-20.12.12.12/spiderCrab.jpg")
   });
 
   it("should load test environment variables", () => {
