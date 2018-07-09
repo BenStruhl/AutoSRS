@@ -1,4 +1,4 @@
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, fs} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif} from "./funcs";
 
 export const robot = require("robotjs");
 export const printJS = require("printJS");
@@ -7,7 +7,7 @@ export const printJS = require("printJS");
 // exports all files in a specified folder to printport
 // to be dropped into Srs
 export const exportToPaperPort = () => {
-    var listOfAllFiles = readDir("Path to set folder");
+    var listOfAllFiles = readDir("C:/Users/staff.SRS/Desktop/AutoSRS-master/test_files");
     var listToExportToPaperPort = [];
     for(var file of listOfAllFiles) {
         if(fs.lstatSync(file).isDirectory()) {

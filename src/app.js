@@ -12,6 +12,7 @@ import { remote } from "electron";
 import jetpack from "fs-jetpack";
 import { greet, rotate90, readDir} from "./funcs/funcs";
 import env from "env";
+import { exportToPaperPort } from "./funcs/mainFuncs";
 
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
@@ -26,6 +27,7 @@ const osMap = {
   linux: "Linux"
 };
 
+document.querySelector("#test paper-port-export".addEventListener("click", exportToPaperPort));
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
