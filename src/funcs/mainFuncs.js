@@ -24,7 +24,7 @@ export const exportToPaperPort = () => {
             transferFiles();
 
             var name = /*TODO*/
-            storeFiles()
+            storeFiles(name);
         } 
     }
 
@@ -77,4 +77,22 @@ export const exitTransfer = () => {
     const y = 0;
     robot.moveMouse(x,y);
     robot.mouseClick();
+}
+
+//Stores the files in the correct folder in SRS
+export const storeFiles = (name) => {
+    //Finds the person
+    const sbx = 0;
+    const sby = 0;
+    robot.moveMouse(sbx, sby);
+    robot.mouseClick();
+
+    robot.typeString(name);
+    robot.keyTap("enter");
+
+    //Selects files and moves them in.
+    robot.moveMouse(sbx - 100, sby - 100);
+    robot.mouseClick();
+    robot.keyToggle("control");
+    robot.keyTap("a");
 }
