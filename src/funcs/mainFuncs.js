@@ -1,7 +1,6 @@
 import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif} from "./funcs";
 
 export const robot = require("robotjs");
-export const printJS = require("printJS");
 
 
 // exports all files in a specified folder to printport
@@ -29,7 +28,6 @@ export const exportToPaperPort = () => {
         robot.typeString("PaperPort");
         robot.keyTap("enter")
         for(var xRay in listToExportToPaperPort) {
-            printJS(xRay); 
         }
         // Call 3rd part function
     }

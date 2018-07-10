@@ -10,7 +10,7 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet, rotate90, readDir} from "./funcs/funcs";
+import { greet, rotate90, readDir, PrintImage} from "./funcs/funcs";
 import env from "env";
 import { exportToPaperPort } from "./funcs/mainFuncs";
 
@@ -26,8 +26,7 @@ const osMap = {
   darwin: "macOS",
   linux: "Linux"
 };
-
-document.querySelector("#test paper-port-export".addEventListener("click", exportToPaperPort));
+PrintImage("./test_files/spiderCrab.jpg");
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];

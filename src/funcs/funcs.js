@@ -1,3 +1,5 @@
+import { robot } from "./mainFuncs";
+
 export const Jimp = require("jimp")
 export const fs = require('fs');
 export const path = require("path")
@@ -54,3 +56,17 @@ export const appendParentNameDate = (pathGiven) => {
   fs.renameSync(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
   return  pathName + "/" + newNameToAppend + basename; 
 }
+export const PrintImage = (source) => {
+  document.open();
+  document.write(ImagetoPrint(source));
+  robot.keyTap("enter");
+}
+
+export const ImagetoPrint = (source) => {
+  return "<html><head><script>function step1(){\n" +
+          "setTimeout('step2()', 10);}\n" +
+          "function step2(){window.print();}\n" +
+          "</scri" + "pt></head><body onload='step1()'>\n" +
+          "<img src='" + source + "' /></body></html>";
+}
+
