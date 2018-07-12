@@ -1,4 +1,4 @@
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint} from "./funcs";
 
 export const robot = require("robotjs");
 
@@ -13,7 +13,7 @@ export const exportToPaperPort = () => {
         if(fs.lstatSync(file).isDirectory()) {
             var listOfXRays = readDir(file);
             var listToExportToPaperPort = [];
-            for(var xRay of listOfXRays) {
+            for(var xRay     of listOfXRays) {
                 if(isTif(xRay)) {
                     var newPath = appendParentNameDate(pathGiven);
                     rotate90(pathGiven, newPath);
@@ -43,20 +43,46 @@ export const init = () => {
     robot.typeString("PaperPort");
     robot.keyTap("enter");
 
+    setTimeout(clearPaperPort(), 10000);
+
     //Boot SRS
     //TODO
+}
+
+export const clearPaperPort = () => {
+    robot.moveMouse(500,500);
+    robot.mouseClick();
+    robot.keyToggle("control");
+    robot.keyTap("a");
+    robot.keyToggle("control");
+    robot.keyTap("delete");
+    robot.keyTap("enter");
 }
 
 //Takes a list of file adresses and 
 //prints them all to the default printer.
 export const printFiles = (listToExportToPaperPort) => {
-    for(var file of listToExportToPaperPort) {
-        robot.setKeyboardDelay(0);
-        robot.setMouseDelay(0);
-        
-        for(var xRay in listToExportToPaperPort) {
-        }
+
+    for(var xRay in listToExportToPaperPort) {
+        ImagetoPrint(xRay);
     }
+
+    //Switch to paperport
+    robot.keyTap("command");
+    robot.typeString("PaperPort");
+    robot.keyTap("enter");
+
+    //Stack files
+    robot.moveMouse(500,500);
+    robot.mouseClick();
+    robot.keyToggle("control");
+    robot.keyTap("a");
+    robot.keyToggle("control");
+
+    const stackx = 0;
+    const stacky = 0;
+    robot.moveMouse(stackx, stacky);
+    robot.mouseClick(); 
 }
 
 //Transfers files over to SRS
@@ -95,4 +121,5 @@ export const storeFiles = (name) => {
     robot.mouseClick();
     robot.keyToggle("control");
     robot.keyTap("a");
+    robot.keyToggle("control");
 }
