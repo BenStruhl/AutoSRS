@@ -57,6 +57,10 @@ export const clearPaperPort = () => {
     robot.keyToggle("control");
     robot.keyTap("delete");
     robot.keyTap("enter");
+
+    robot.keyToggle("command");
+    robot.keyTap("up");
+    robot.keyToggle("command");
 }
 
 //Takes a list of file adresses and 
