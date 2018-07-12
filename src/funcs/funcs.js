@@ -1,8 +1,8 @@
 import { robot } from "./mainFuncs";
 
-export const Jimp = require("jimp")
+export const Jimp = require("jimp");
 export const fs = require('fs');
-export const path = require("path")
+export const path = require("path");
 
 
 export const greet = () => {
@@ -59,7 +59,10 @@ export const appendParentNameDate = (pathGiven) => {
 export const PrintImage = (source) => {
   document.open();
   document.write(ImagetoPrint(source));
-  robot.keyTap("enter");
+  setTimeout( () => { 
+    console.log("hi")
+    robot.keyTap("enter")
+  }, 100);
 }
 
 export const ImagetoPrint = (source) => {
