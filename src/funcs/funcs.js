@@ -70,3 +70,8 @@ export const ImagetoPrint = (source) => {
           "<img src='" + source + "' /></body></html>";
 }
 
+export const selectAll = () => {
+  robot.keyToggle("control");
+  robot.keyTap("a");
+  robot.keyToggle("control");
+}
