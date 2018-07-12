@@ -59,10 +59,7 @@ export const appendParentNameDate = (pathGiven) => {
 export const PrintImage = (source) => {
   document.open();
   document.write(ImagetoPrint(source));
-  setTimeout( () => { 
-    console.log("hi")
-    robot.keyTap("enter")
-  }, 100);
+  robot.keyTap("enter");
 }
 
 export const ImagetoPrint = (source) => {
