@@ -56,22 +56,47 @@ export const init = () => {
     robot.mouseClick();
     robot.mouseClick();
 
+    robot.keyTap("left");
+    robot.keyTap("enter");
+
     //Insert Username
     const unx = 2396;
     const uny = 480;
     var username = getUsername();
+    var pass = getPass();
 
     robot.moveMouse(unx, uny);
     robot.mouseClick();
     robot.typeString(username);
 
-
     //Insert Password
     const px = 2342;
     const py = 522;
-
-    var pass = getPass();
+    
     robot.moveMouse(px, py);
+    robot.mouseClick();
+    robot.typeString(pass);
+
+    setTimeout(bootSrs, 10000);
+}
+
+export const bootSrs = () => {
+    const srsx = 2043;
+    const srsy = -67;
+    robot.moveMouse(srsx, srsy);
+    robot.mouseClick();
+    robot.mouseClick(); 
+
+    const unx = 2526;
+    const uny = 556;
+    robot.moveMouse(unx, uny);
+    robot.mouseClick();
+    robot.typeString(name);
+
+    const pwx = 2526;
+    const pwy = 586;
+
+    robot.moveMouse(pwx, pwy);
     robot.mouseClick();
     robot.typeString(pass);
 }
