@@ -50,22 +50,25 @@ export const init = () => {
     robot.keyTap("d");
     robot.keyToggle("command");
 
-    var brx = 1863;
-    var bry = 971;
+    const brx = 1863;
+    const bry = 971;
     robot.moveMouse(brx, bry);
     robot.mouseClick();
     robot.mouseClick();
 
-    var unx = 2396;
-    var uny = 480;
+    //Insert Username
+    const unx = 2396;
+    const uny = 480;
     var username = getUsername();
 
     robot.moveMouse(unx, uny);
     robot.mouseClick();
     robot.typeString(username);
 
-    var px = 2342;
-    var py = 522;
+
+    //Insert Password
+    const px = 2342;
+    const py = 522;
 
     var pass = getPass();
     robot.moveMouse(px, py);
@@ -127,38 +130,42 @@ export const exitTransfer = () => {
 //Stores the files in the correct folder in SRS
 export const storeFiles = (name) => {
     //Finds the person
-    const sbx = 2071;
-    const sby = 954;
+    const sbx = 2905;
+    const sby = 902;
     robot.moveMouse(sbx, sby);
     robot.mouseClick();
 
     //Enter First Name
-    robot.keyTap("tab");
-
-    for(var i = 0; i < 50; i++)
-        robot.keyTap("right");
-
-    for(var i = 0; i < 50; i ++)
-        robot.keyTap("backspace")
-
     robot.typeString(name);
 
     //Enter Last Name
     robot.keyTap("tab");
-    robot.keyTap("tab");
-
-    for(var i = 0; i < 50; i++)
-        robot.keyTap("right");
-
-    for(var i = 0; i < 50; i ++)
-        robot.keyTap("backspace")
-
     robot.typeString(name);
 
     robot.keyTap("enter");
+    robot.keyTap("enter");
+
+    //Enter the date
+    const dmx = 2755;
+    const dmy = 903;
+    robot.moveMouse(dmx, dmy);
+    robot.mouseClick();
+    robot.typeString(date.month);
+    robot.keyTap("right");
+    robot.typeString(date.day);
+    robot.keyTap("right");
+    robot.typeString(date.year);
 
     //Selects files and moves them in.
-    robot.moveMouse(sbx - 100, sby - 100);
+    robot.moveMouse(2348, 52);
     robot.mouseClick();
     selectAll();
+
+    const fix = 2355;
+    const fiy = 142;
+    robot.moveMouse(fix, fiy);
+
+    const flx = 2346;
+    const fly = 978
+    robot.dragMouse(flx, fly);
 }
