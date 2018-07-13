@@ -46,7 +46,31 @@ export const init = () => {
     setTimeout(clearPaperPort, 30000);
 
     //Boot SRS
-    //TODO
+    robot.keyToggle("command");
+    robot.keyTap("d");
+    robot.keyToggle("command");
+
+    var brx = 1863;
+    var bry = 971;
+    robot.moveMouse(brx, bry);
+    robot.mouseClick();
+    robot.mouseClick();
+
+    var unx = 2396;
+    var uny = 480;
+    var username = getUsername();
+
+    robot.moveMouse(unx, uny);
+    robot.mouseClick();
+    robot.typeString(username);
+
+    var px = 2342;
+    var py = 522;
+
+    var pass = getPass();
+    robot.moveMouse(px, py);
+    robot.mouseClick();
+    robot.typeString(pass);
 }
 
 export const clearPaperPort = () => {

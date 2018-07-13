@@ -75,3 +75,11 @@ export const selectAll = () => {
   robot.keyTap("a");
   robot.keyToggle("control");
 }
+
+export const getUsername = () => {
+  return;
+}
+
+export const getPass = () => {
+  return;
+}
