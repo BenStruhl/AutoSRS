@@ -26,7 +26,7 @@ const osMap = {
   darwin: "macOS",
   linux: "Linux"
 };
-document.querySelector("#testButton").addEventListener("PrintImage", PrintImage("./test_files/spiderCrab.jpg"));  
+document.querySelector("#testButton").addEventListener("PrintImage", PrintImage(document));  
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
