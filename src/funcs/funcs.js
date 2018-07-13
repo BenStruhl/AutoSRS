@@ -61,7 +61,17 @@ export const PrintImage = () => {
   window.webContents.print({ silent: true});
 }
 
-
+export const getPatientInfo = (filename) => {
+  var rawPatientInfo = filename.split("_");
+  var firstName = rawPatientInfo[0];
+  var lastName = rawPatientInfo[1];
+  var dateOf = rawPatientInfo[2];
+  var rawDateInfo = dateOf.split("-");
+  var month = rawDateInfo[0];
+  var day = rawDateInfo[1];
+  var year = rawDateInfo[2];
+  return {firstName: firstName, lastName: lastName, month: month, day: day, year: year}
+}
 export const selectAll = () => {
   robot.keyToggle("control");
   robot.keyTap("a");
