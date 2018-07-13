@@ -62,3 +62,16 @@ export const PrintImage = () => {
 }
 
 
+export const selectAll = () => {
+  robot.keyToggle("control");
+  robot.keyTap("a");
+  robot.keyToggle("control");
+}
+
+export const getUsername = () => {
+  return;
+}
+
+export const getPass = () => {
+  return;
+}

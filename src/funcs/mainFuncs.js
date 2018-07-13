@@ -1,4 +1,4 @@
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint, selectAll} from "./funcs";
 
 export const robot = require("robotjs");
 
@@ -43,18 +43,40 @@ export const init = () => {
     robot.typeString("PaperPort");
     robot.keyTap("enter");
 
-    setTimeout(clearPaperPort(), 10000);
+    setTimeout(clearPaperPort, 30000);
 
     //Boot SRS
-    //TODO
+    robot.keyToggle("command");
+    robot.keyTap("d");
+    robot.keyToggle("command");
+
+    var brx = 1863;
+    var bry = 971;
+    robot.moveMouse(brx, bry);
+    robot.mouseClick();
+    robot.mouseClick();
+
+    var unx = 2396;
+    var uny = 480;
+    var username = getUsername();
+
+    robot.moveMouse(unx, uny);
+    robot.mouseClick();
+    robot.typeString(username);
+
+    var px = 2342;
+    var py = 522;
+
+    var pass = getPass();
+    robot.moveMouse(px, py);
+    robot.mouseClick();
+    robot.typeString(pass);
 }
 
 export const clearPaperPort = () => {
     robot.moveMouse(500,500);
     robot.mouseClick();
-    robot.keyToggle("control");
-    robot.keyTap("a");
-    robot.keyToggle("control");
+    selectAll();
     robot.keyTap("delete");
     robot.keyTap("enter");
 
@@ -79,51 +101,64 @@ export const printFiles = (listToExportToPaperPort) => {
     //Stack files
     robot.moveMouse(500,500);
     robot.mouseClick();
-    robot.keyToggle("control");
-    robot.keyTap("a");
-    robot.keyToggle("control");
+    selectAll();
 
-    const stackx = 0;
-    const stacky = 0;
-    robot.moveMouse(stackx, stacky);
-    robot.mouseClick(); 
+    robot.mouseClick("right");
+    robot.keyTap("s");
 }
 
 //Transfers files over to SRS
 export const transferFiles = () => {
     //Click on transfer briefcase in bottom left
-    const bcx = 0;
-    const bcy = 0;
+    const bcx = 2007;
+    const bcy = 1061;
     robot.moveMouse(bcx, bcy)
     robot.mouseClick();
 
     //Wait, then close program
-    setTimeout(exitTransfer(), 10000);
+    setTimeout(exitTransfer, 20000);
 }
 
 //Exits the transfer files window
 export const exitTransfer = () => {
-    const x = 0;
-    const y = 0;
-    robot.moveMouse(x,y);
-    robot.mouseClick();
+    keyTap("up");
 }
 
 //Stores the files in the correct folder in SRS
 export const storeFiles = (name) => {
     //Finds the person
-    const sbx = 0;
-    const sby = 0;
+    const sbx = 2071;
+    const sby = 954;
     robot.moveMouse(sbx, sby);
     robot.mouseClick();
 
+    //Enter First Name
+    robot.keyTap("tab");
+
+    for(var i = 0; i < 50; i++)
+        robot.keyTap("right");
+
+    for(var i = 0; i < 50; i ++)
+        robot.keyTap("backspace")
+
     robot.typeString(name);
+
+    //Enter Last Name
+    robot.keyTap("tab");
+    robot.keyTap("tab");
+
+    for(var i = 0; i < 50; i++)
+        robot.keyTap("right");
+
+    for(var i = 0; i < 50; i ++)
+        robot.keyTap("backspace")
+
+    robot.typeString(name);
+
     robot.keyTap("enter");
 
     //Selects files and moves them in.
     robot.moveMouse(sbx - 100, sby - 100);
     robot.mouseClick();
-    robot.keyToggle("control");
-    robot.keyTap("a");
-    robot.keyToggle("control");
+    selectAll();
 }
