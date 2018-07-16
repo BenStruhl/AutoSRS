@@ -1,4 +1,4 @@
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint, selectAll} from "./funcs";
+import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets} from "./funcs";
 
 export const robot = require("robotjs");
 
@@ -23,17 +23,10 @@ export const exportToPaperPort = () => {
             printFiles(listToExportToPaperPort);
             transferFiles();
 
-            var name = /*TODO*/
+            var name = getPatientInfo();
             storeFiles(name);
         } 
     }
-
-    
-    // user robot.js to activate paperport 
-    // for each name in the list
-    //      print(file)
-    //      robojs(hit enter)   
-    // when everything is done stage3()
 }
 
 //Turns on all the programs that will be used
@@ -62,12 +55,11 @@ export const init = () => {
     //Insert Username
     const unx = 2396;
     const uny = 480;
-    var username = getUsername();
-    var pass = getPass();
+    var username = getSecrets();
 
     robot.moveMouse(unx, uny);
     robot.mouseClick();
-    robot.typeString(username);
+    robot.typeString(username.username);
 
     //Insert Password
     const px = 2342;
@@ -75,7 +67,7 @@ export const init = () => {
     
     robot.moveMouse(px, py);
     robot.mouseClick();
-    robot.typeString(pass);
+    robot.typeString(username.password);
 
     setTimeout(bootSrs, 10000);
 }
@@ -161,11 +153,11 @@ export const storeFiles = (name) => {
     robot.mouseClick();
 
     //Enter First Name
-    robot.typeString(name);
+    robot.typeString(name.firstName);
 
     //Enter Last Name
     robot.keyTap("tab");
-    robot.typeString(name);
+    robot.typeString(name.lastName);
 
     robot.keyTap("enter");
     robot.keyTap("enter");
@@ -175,11 +167,11 @@ export const storeFiles = (name) => {
     const dmy = 903;
     robot.moveMouse(dmx, dmy);
     robot.mouseClick();
-    robot.typeString(date.month);
+    robot.typeString(name.month);
     robot.keyTap("right");
-    robot.typeString(date.day);
+    robot.typeString(name.day);
     robot.keyTap("right");
-    robot.typeString(date.year);
+    robot.typeString(name.year);
 
     //Selects files and moves them in.
     robot.moveMouse(2348, 52);
