@@ -1,56 +1,73 @@
-import { greet, bye, rotate90, fs, readDir, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets} from "./funcs";
+import { greet, bye, rotate90, fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep} from "./funcs";
 
 export const robot = require("robotjs");
+robot.setKeyboardDelay(1000);
+    robot.setMouseDelay(1000);
 
 
 // exports all files in a specified folder to printport
 // to be dropped into Srs
 export const exportToPaperPort = () => {
-    init();
-
-    var listOfAllFiles = readDir("C:/Users/staff.SRS/Desktop/AutoSRS-master/test_files");
+    
+    //init();
+    const abspath = "C:\\Test";
+    var listOfAllFiles = fs.readdirSync(abspath);
     for(var file of listOfAllFiles) {
-        if(fs.lstatSync(file).isDirectory()) {
-            var listOfXRays = readDir(file);
+        console.log(file);
+        const tempPath = abspath + "\\" + file;
+        if(fs.lstatSync(tempPath).isDirectory()) {
+            var listOfXRays = fs.readdirSync(tempPath);
             var listToExportToPaperPort = [];
             for(var xRay     of listOfXRays) {
-                if(isTif(xRay)) {
-                    var newPath = appendParentNameDate(pathGiven);
-                    rotate90(pathGiven, newPath);
+                var tempPath2 = tempPath + "\\" + xRay;
+                if(isTif(tempPath2)) {
+                    var newPath = appendParentNameDate(tempPath2);
+                    rotate90(tempPath2, newPath);
                     listToExportToPaperPort.push(newPath);
+                    console.log("true");
+                }
+                else{
+                    console.log("false");
                 }
             }
+            /*
             printFiles(listToExportToPaperPort);
             transferFiles();
 
             var name = getPatientInfo();
-            storeFiles(name);
+            storeFiles(name);*/
         } 
     }
 }
 
 //Turns on all the programs that will be used
 export const init = () => {
+    sleep(5000);
     //Turn on paper port
     robot.keyTap("command");
-    robot.typeString("PaperPort");
+    robot.typeStringDelayed("PaperPort");
     robot.keyTap("enter");
 
-    setTimeout(clearPaperPort, 30000);
+    sleep(10000);
+    clearPaperPort();
 
     //Boot SRS
-    robot.keyToggle("command");
+    robot.keyToggle("command", "down");
     robot.keyTap("d");
-    robot.keyToggle("command");
+    robot.keyToggle("command", "up");
 
+    console.log("start");
     const brx = 1863;
     const bry = 971;
     robot.moveMouse(brx, bry);
-    robot.mouseClick();
-    robot.mouseClick();
+    robot.mouseClick("left", true);
+
+    sleep(2000);
 
     robot.keyTap("left");
     robot.keyTap("enter");
+
+    sleep(4000);
 
     //Insert Username
     const unx = 2396;
@@ -62,47 +79,62 @@ export const init = () => {
     robot.typeString(username.username);
 
     //Insert Password
-    const px = 2342;
+    const px = 2396;
     const py = 522;
-    
-    robot.moveMouse(px, py);
+
+    robot.moveMouse(px,py);
     robot.mouseClick();
     robot.typeString(username.password);
+    robot.keyTap("enter");
 
-    setTimeout(bootSrs, 10000);
-}
-
-export const bootSrs = () => {
+    sleep(15000);
+    
     const srsx = 2043;
     const srsy = -67;
     robot.moveMouse(srsx, srsy);
-    robot.mouseClick();
-    robot.mouseClick(); 
+    robot.mouseClick("left", true);
 
-    const unx = 2526;
-    const uny = 556;
-    robot.moveMouse(unx, uny);
+    const un2x = 2526;
+    const un2y = 556;
+    robot.moveMouse(un2x, un2y);
     robot.mouseClick();
-    robot.typeString(name);
+    robot.typeStringDelayed(username.user2);
 
     const pwx = 2526;
     const pwy = 586;
 
     robot.moveMouse(pwx, pwy);
     robot.mouseClick();
-    robot.typeString(pass);
+    robot.typeStringDelayed(username.pass2);
+    robot.keyTap("enter");
+
+    sleep(15000);
+
+    const spx = 2838;
+    const spy = 960;
+    robot.moveMouse(spx, spy);
+    robot.mouseClick();
+
+    sleep(5000);
+
+    robot.moveMouse(brx, bry);
+    robot.mouseClick();
 }
 
+
 export const clearPaperPort = () => {
+    robot.keyToggle("command", "down");
+    robot.keyTap("up");
+    robot.keyToggle("command", "up");
+
     robot.moveMouse(500,500);
     robot.mouseClick();
     selectAll();
+    
+    sleep(500);
     robot.keyTap("delete");
+    sleep(500);
     robot.keyTap("enter");
-
-    robot.keyToggle("command");
-    robot.keyTap("up");
-    robot.keyToggle("command");
 }
 
 //Takes a list of file adresses and 
@@ -115,7 +147,7 @@ export const printFiles = (listToExportToPaperPort) => {
 
     //Switch to paperport
     robot.keyTap("command");
-    robot.typeString("PaperPort");
+    robot.typeStringDelayed("PaperPort");
     robot.keyTap("enter");
 
     //Stack files
@@ -135,14 +167,10 @@ export const transferFiles = () => {
     robot.moveMouse(bcx, bcy)
     robot.mouseClick();
 
-    //Wait, then close program
-    setTimeout(exitTransfer, 20000);
+    sleep(20000);
+    robot.keyTap("up");
 }
 
-//Exits the transfer files window
-export const exitTransfer = () => {
-    keyTap("up");
-}
 
 //Stores the files in the correct folder in SRS
 export const storeFiles = (name) => {
@@ -153,11 +181,11 @@ export const storeFiles = (name) => {
     robot.mouseClick();
 
     //Enter First Name
-    robot.typeString(name.firstName);
+    robot.typeStringDelayed(name.firstName);
 
     //Enter Last Name
     robot.keyTap("tab");
-    robot.typeString(name.lastName);
+    robot.typeStringDelayed(name.lastName);
 
     robot.keyTap("enter");
     robot.keyTap("enter");
@@ -167,11 +195,11 @@ export const storeFiles = (name) => {
     const dmy = 903;
     robot.moveMouse(dmx, dmy);
     robot.mouseClick();
-    robot.typeString(name.month);
+    robot.typeStringDelayed(name.month);
     robot.keyTap("right");
-    robot.typeString(name.day);
+    robot.typeStringDelayed(name.day);
     robot.keyTap("right");
-    robot.typeString(name.year);
+    robot.typeStringDelayed(name.year);
 
     //Selects files and moves them in.
     robot.moveMouse(2348, 52);
