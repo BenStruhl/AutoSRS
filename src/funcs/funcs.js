@@ -1,6 +1,7 @@
 import { remote } from "electron";
 import { PrintJS } from "print-js";
 
+const { exec } = require('child_process');
 export const Jimp = require("jimp");
 export const fs = require('fs');
 export const path = require("path");
@@ -57,9 +58,17 @@ export const appendParentNameDate = (pathGiven) => {
   fs.renameSync(pathName + "/"  + basename, pathName + "/" + newNameToAppend + basename);
   return  pathName + "/" + newNameToAppend + basename; 
 }
-export const PrintImage = () => {
-  console.log("hi")
-  printJS({printable: 'img/spiderCrab.jpg',type: 'image'});
+export const PrintImage = (path) => {
+  exec('C:\\Windows\\System32\\mspaint.exe /pt ' + path + ' \"PaperPort Image Printer\"', (err, stdout, stderr) => {
+    if (err) {
+      // node couldn't execute the command
+      return;
+    }
+  
+    // the *entire* stdout and stderr (buffered)
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+  });
 }
 
 export const getPatientInfo = (filename) => {
