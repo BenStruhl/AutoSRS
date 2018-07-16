@@ -1,4 +1,5 @@
 import { remote } from "electron";
+import { PrintJS } from "print-js";
 
 export const Jimp = require("jimp");
 export const fs = require('fs');
@@ -57,8 +58,8 @@ export const appendParentNameDate = (pathGiven) => {
   return  pathName + "/" + newNameToAppend + basename; 
 }
 export const PrintImage = () => {
-  const window = remote.getCurrentWindow();
-  window.webContents.print({ silent: true});
+  console.log("hi")
+  printJS({printable: 'img/spiderCrab.jpg',type: 'image'});
 }
 
 export const getPatientInfo = (filename) => {

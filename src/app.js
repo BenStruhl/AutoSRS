@@ -10,7 +10,7 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet, getUsername,PrintImage} from "./funcs/funcs";
+import { greet, getSecrets,PrintImage} from "./funcs/funcs";
 import env from "env";
 import { exportToPaperPort } from "./funcs/mainFuncs";
 
@@ -27,8 +27,9 @@ const osMap = {
   linux: "Linux"
 };
 
-getUsername();
+getSecrets();
 document.querySelector("#testButton").addEventListener("click", PrintImage);  
+// document.querySelector("#mainImage").setAttribute("src","./test_files/spiderCrab.jpg");
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
