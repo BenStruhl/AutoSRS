@@ -30,11 +30,11 @@ describe("funcs", () => {
   
       return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
       }
-      if(rotate90("./test_files/spiderCrab.jpg", "./test_files/spiderCrabTest.jpg"))
+      if(rotate90("./test_files/CCITT_1.TIF", "./test_files/CCITT_1_TEST.TIF"))
         var expected = new Image();
         var test = new Image();
-        expected.src = "./test_files/spiderCrabRotation.jpg";
-        test.src = "./test_files/spiderCrabTest";
+        expected.src = "./test_files/CCITT_1.TIF";
+        test.src = "./test_files/CCITT_1_TEST.TIF";
         expect(getBase64Image(test))
         .to.equal(getBase64Image(expected));
   });

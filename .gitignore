@@ -11,3 +11,4 @@ Thumbs.db
 /app/app.js
 /app/background.js
 /app/**/*.map
+# https://github.com/oliver-moran/jimp
