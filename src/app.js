@@ -10,9 +10,9 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet, getSecrets,PrintImage} from "./funcs/funcs";
+import { greet, getSecrets,PrintImage, getMouseCoor} from "./funcs/funcs";
 import env from "env";
-import { exportToPaperPort } from "./funcs/mainFuncs";
+import { exportToPaperPort, init } from "./funcs/mainFuncs";
 
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
@@ -28,7 +28,7 @@ const osMap = {
 };
 
 getSecrets();
-document.querySelector("#testButton").addEventListener("click", PrintImage);  
+document.querySelector("#testButton").addEventListener("click", exportToPaperPort);  
 // document.querySelector("#mainImage").setAttribute("src","./test_files/spiderCrab.jpg");
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
