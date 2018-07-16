@@ -78,11 +78,9 @@ export const selectAll = () => {
   robot.keyToggle("control");
 }
 
-export const getUsername = () => {
-  
-  return;
-}
-
-export const getPass = () => {
-  return;
+export const getSecrets = () => {
+  let raw = fs.readFileSync("././secret/secret.txt");
+  let secretText = raw.toString();
+  let secretList = secretText.split("\n");
+  return {username: secretList[0], password: secretList[1]};
 }

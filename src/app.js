@@ -10,7 +10,7 @@ import "./helpers/external_links.js";
 
 import { remote } from "electron";
 import jetpack from "fs-jetpack";
-import { greet, rotate90, readDir, PrintImage} from "./funcs/funcs";
+import { greet, getUsername,PrintImage} from "./funcs/funcs";
 import env from "env";
 import { exportToPaperPort } from "./funcs/mainFuncs";
 
@@ -26,7 +26,9 @@ const osMap = {
   darwin: "macOS",
   linux: "Linux"
 };
-document.querySelector("#testButton").addEventListener("PrintImage", PrintImage(remote.getCurrentWindow()));  
+
+getUsername();
+document.querySelector("#testButton").addEventListener("click", PrintImage);  
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();
 document.querySelector("#os").innerHTML = osMap[process.platform];
