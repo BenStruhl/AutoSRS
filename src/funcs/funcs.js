@@ -2,7 +2,7 @@ import { remote } from "electron";
 import { PrintJS } from "print-js";
 
 const { exec } = require('child_process');
-export const Jimp = require("jimp");
+export const sharp = require("sharp");
 export const fs = require('fs');
 export const path = require("path");
 
@@ -18,11 +18,9 @@ export const bye = () => {
 
 //Rotates an image 90 degrees, returning true if succesful.
 export const rotate90 = (path, newPath) => {
-  Jimp.read(path, function (err, image) {
-    if (err) throw err;
-    image.rotate(90)
-         .write(newPath); // save
-  });
+  sharp(path)
+  .rotate(90)
+  .toFile(newPath, (err, info) => { console.log("Error: " + err + "\n" + "Info: " + info)});
   return true;
 };
 
