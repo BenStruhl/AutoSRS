@@ -56,7 +56,6 @@ export const init = () => {
     robot.keyTap("d");
     robot.keyToggle("command", "up");
 
-    console.log("start");
     const brx = 1863;
     const bry = 971;
     robot.moveMouse(brx, bry);
@@ -69,25 +68,13 @@ export const init = () => {
 
     sleep(4000);
 
-    //Insert Username
-    const unx = 2396;
-    const uny = 480;
-    var username = getSecrets();
+    bootSRS();
 
-    robot.moveMouse(unx, uny);
-    robot.mouseClick();
-    robot.typeString(username.username);
+    //Logout
+    robot.keyTap("command");
+    
 
-    //Insert Password
-    const px = 2396;
-    const py = 522;
-
-    robot.moveMouse(px,py);
-    robot.mouseClick();
-    robot.typeString(username.password);
-    robot.keyTap("enter");
-
-    sleep(15000);
+    bootSRS();
     
     const srsx = 2043;
     const srsy = -67;
@@ -135,6 +122,28 @@ export const clearPaperPort = () => {
     robot.keyTap("delete");
     sleep(500);
     robot.keyTap("enter");
+}
+
+export const bootSRS = () => {
+    //Insert Username
+    const unx = 2396;
+    const uny = 480;
+    var username = getSecrets();
+
+    robot.moveMouse(unx, uny);
+    robot.mouseClick();
+    robot.typeString(username.username);
+
+    //Insert Password
+    const px = 2396;
+    const py = 522;
+
+    robot.moveMouse(px,py);
+    robot.mouseClick();
+    robot.typeString(username.password);
+    robot.keyTap("enter");
+
+    sleep(15000);
 }
 
 //Takes a list of file adresses and 
