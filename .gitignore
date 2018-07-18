@@ -6,6 +6,7 @@ Thumbs.db
 /dist
 /temp
 /secret
+/logs 
 
 # ignore everything in 'app' folder what had been generated from 'src' folder
 /app/app.js

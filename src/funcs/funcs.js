@@ -101,3 +101,17 @@ export const getMouseCoor = () => {
   while(true)
     console.log(robot.getMousePos());
 }
+
+// opens a new log file
+export const openLog = () => {
+  var datetime = new Date();
+  var logPath = "../../logs/" + datetime.toDateString() + ".txt";
+  fs.writeSync(logPath, datetime.toDateString());
+  return logPath;
+}
+
+// writes to a log file given a path to a log
+export const writeToLog = (path, data) => {
+  fs.writeSync(path, data);
+  return true;
+}
