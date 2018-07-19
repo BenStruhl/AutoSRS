@@ -1,4 +1,4 @@
-import { fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep} from "./funcs";
+import { fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep, PrintImage} from "./funcs";
 
 export const robot = require("robotjs");
 robot.setKeyboardDelay(1000);
@@ -34,7 +34,9 @@ export const exportToPaperPort = () => {
             transferFiles();
 
             var name = getPatientInfo();
+            console.log("got name");
             storeFiles(name);
+            console.log("stored");
         } 
     }
 
@@ -111,6 +113,9 @@ export const init = () => {
 
     sleep(5000);
 
+    const brx = 1863;
+    const bry = 971;
+
     robot.moveMouse(brx, bry);
     robot.mouseClick();
 }
@@ -173,10 +178,11 @@ export const bootSRS = () => {
 //prints them all to the default printer.
 export const printFiles = (listToExportToPaperPort) => {
 
-    for(var xRay in listToExportToPaperPort) {
-        ImagetoPrint(xRay);
+    for(var xRay of listToExportToPaperPort) {
+        PrintImage(xRay);
     }
 
+    sleep(3000 * listToExportToPaperPort.length);
     //Switch to paperport
     robot.keyTap("command");
     robot.typeStringDelayed("PaperPort");
@@ -190,12 +196,12 @@ export const printFiles = (listToExportToPaperPort) => {
     robot.mouseClick("right");
     robot.keyTap("s");
 
-    //Rotate files
-    robot.keyTap("alt");
-    robot.keyTap("i");
-    robot.keyTap("o");
-    robot.keyTap("down");
-    robot.keyTap("enter");
+    // //Rotate files
+    // robot.keyTap("alt");
+    // robot.keyTap("i");
+    // robot.keyTap("o");
+    // robot.keyTap("down");
+    // robot.keyTap("enter");
 }
 
 //Transfers files over to SRS
