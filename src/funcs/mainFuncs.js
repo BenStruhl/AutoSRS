@@ -33,7 +33,7 @@ export const exportToPaperPort = () => {
             printFiles(listToExportToPaperPort);
             transferFiles();
 
-            var name = getPatientInfo();
+            var name = getPatientInfo(listToExportToPaperPort[0]);
             storeFiles(name);
         } 
     }
