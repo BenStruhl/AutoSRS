@@ -50,7 +50,7 @@ export const PrintImage = (path) => {
       // node couldn't execute the command
       return;
     }
-  
+
     // the *entire* stdout and stderr (buffered)
     console.log(`stdout: ${stdout}`);
     console.log(`stderr: ${stderr}`);
@@ -58,7 +58,8 @@ export const PrintImage = (path) => {
 }
 
 export const getPatientInfo = (filename) => {
-  var rawPatientInfo = filename.split("_");
+  var rawFileName = path.basename(filename);
+  var rawPatientInfo = rawFileName.split("_");
   var firstName = rawPatientInfo[0];
   var lastName = rawPatientInfo[1];
   var dateOf = rawPatientInfo[2];

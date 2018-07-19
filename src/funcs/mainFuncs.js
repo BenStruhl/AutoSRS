@@ -33,9 +33,9 @@ export const exportToPaperPort = () => {
             printFiles(listToExportToPaperPort);
             transferFiles();
 
-            var name = getPatientInfo();
-            console.log("got name");
             var name = getPatientInfo(listToExportToPaperPort[0]);
+            console.log("got name");
+
             storeFiles(name);
             console.log("stored");
         } 
@@ -113,6 +113,14 @@ export const init = () => {
     robot.mouseClick();
 
     sleep(5000);
+    const fix = 2355;
+    const fiy = 142;
+    robot.moveMouse(fix, fiy);
+    selectAll();
+    sleep(500);
+    robot.keyTap("delete");
+    sleep(500);
+    robot.keyTap("enter");
 
     const brx = 1863;
     const bry = 971;
@@ -172,7 +180,7 @@ export const bootSRS = () => {
     robot.typeString(username.password);
     robot.keyTap("enter");
 
-    sleep(15000);
+    sleep(10000);
 }
 
 //Takes a list of file adresses and 
@@ -181,13 +189,9 @@ export const printFiles = (listToExportToPaperPort) => {
 
     for(var xRay of listToExportToPaperPort) {
         PrintImage(xRay);
+        sleep(3000);
+        fs.unlinkSync(xRay);
     }
-
-    sleep(3000 * listToExportToPaperPort.length);
-    //Switch to paperport
-    robot.keyTap("command");
-    robot.typeStringDelayed("PaperPort");
-    robot.keyTap("enter");
 
     //Stack files
     robot.moveMouse(500,500);
@@ -196,13 +200,6 @@ export const printFiles = (listToExportToPaperPort) => {
 
     robot.mouseClick("right");
     robot.keyTap("s");
-
-    // //Rotate files
-    // robot.keyTap("alt");
-    // robot.keyTap("i");
-    // robot.keyTap("o");
-    // robot.keyTap("down");
-    // robot.keyTap("enter");
 }
 
 //Transfers files over to SRS
@@ -248,15 +245,13 @@ export const storeFiles = (name) => {
     robot.typeStringDelayed(name.year);
 
     //Selects files and moves them in.
-    robot.moveMouse(2348, 52);
-    robot.mouseClick();
-    selectAll();
-
     const fix = 2355;
     const fiy = 142;
     robot.moveMouse(fix, fiy);
 
     const flx = 2346;
-    const fly = 978
-    robot.dragMouse(flx, fly);
+    const fly = 978;
+    robot.mouseToggle("down");
+    robot.moveMouse(flx, fly);
+    robot.mouseToggle("up");
 }

@@ -12,7 +12,7 @@ import { remote } from "electron";
 import jetpack from "fs-jetpack";
 import { greet, getSecrets,PrintImage, getMouseCoor} from "./funcs/funcs";
 import env from "env";
-import { exportToPaperPort, init } from "./funcs/mainFuncs";
+import { exportToPaperPort, init, storeFiles } from "./funcs/mainFuncs";
 
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
