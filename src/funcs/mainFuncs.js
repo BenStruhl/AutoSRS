@@ -9,7 +9,7 @@ robot.setKeyboardDelay(1000);
 // to be dropped into Srs
 export const exportToPaperPort = () => {
     
-    //init();
+    init();
     const abspath = "C:\\Test";
     var listOfAllFiles = fs.readdirSync(abspath);
     for(var file of listOfAllFiles) {
@@ -55,23 +55,14 @@ export const init = () => {
     robot.keyTap("d");
     robot.keyToggle("command", "up");
 
-    const brx = 1863;
-    const bry = 971;
-    robot.moveMouse(brx, bry);
-    robot.mouseClick("left", true);
-
-    sleep(2000);
-
-    robot.keyTap("left");
-    robot.keyTap("enter");
-
-    sleep(4000);
-
     bootSRS();
 
     //Logout
     robot.keyTap("command");
-    
+    robot.keyTap("right");
+    robot.keyTap("enter");
+
+    sleep(20000);
 
     bootSRS();
     
@@ -124,6 +115,18 @@ export const clearPaperPort = () => {
 }
 
 export const bootSRS = () => {
+    const brx = 1863;
+    const bry = 971;
+    robot.moveMouse(brx, bry);
+    robot.mouseClick("left", true);
+
+    sleep(2000);
+
+    robot.keyTap("left");
+    robot.keyTap("enter");
+
+    sleep(4000);
+    
     //Insert Username
     const unx = 2396;
     const uny = 480;
