@@ -42,6 +42,10 @@ export const exportToPaperPort = () => {
 //Turns on all the programs that will be used
 export const init = () => {
     sleep(5000);
+    robot.keyToggle("command", "down");
+    robot.keyTap("d");
+    robot.keyToggle("command", "up");
+
     //Turn on paper port
     robot.keyTap("command");
     robot.typeStringDelayed("PaperPort");
@@ -115,10 +119,14 @@ export const clearPaperPort = () => {
 }
 
 export const bootSRS = () => {
-    const brx = 1863;
-    const bry = 971;
-    robot.moveMouse(brx, bry);
-    robot.mouseClick("left", true);
+    // const brx = 1863;
+    // const bry = 971;
+    // robot.moveMouse(brx, bry);
+    // robot.mouseClick("left", true);
+
+    robot.keyTap("command");
+    robot.keyTap("down");
+    robot.keyTap("enter");
 
     sleep(2000);
 
@@ -126,7 +134,9 @@ export const bootSRS = () => {
     robot.keyTap("enter");
 
     sleep(4000);
-    
+
+
+
     //Insert Username
     const unx = 2396;
     const uny = 480;
