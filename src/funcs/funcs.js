@@ -2,7 +2,6 @@ import { remote } from "electron";
 import { PrintJS } from "print-js";
 
 const { exec } = require('child_process');
-export const sharp = require("sharp");
 export const fs = require('fs');
 export const path = require("path");
 
@@ -16,13 +15,6 @@ export const bye = () => {
   return "See ya!";
 };
 
-//Rotates an image 90 degrees, returning true if succesful.
-export const rotate90 = (path, newPath) => {
-  sharp(path)
-  .rotate(90)
-  .toFile(newPath, (err, info) => { console.log("Error: " + err + "\n" + "Info: " + info)});
-  return true;
-};
 
 //Determines if a given file is a bmp
 export const isTif = (path) => {
@@ -47,7 +39,7 @@ export const appendParentNameDate = (pathGiven) => {
   }
   var basename = path.basename(pathGiven);
   var pathName = parentNameRawList.join("\\");
-  //fs.renameSync(pathName + "\\"  + basename, pathName + "\\" + newNameToAppend + basename);
+  fs.copyFileSync(pathName + "\\"  + basename, pathName + "\\" + newNameToAppend + basename);
   return  pathName + "\\" + newNameToAppend + basename; 
 }
 export const PrintImage = (path) => {

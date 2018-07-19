@@ -1,4 +1,4 @@
-import { greet, bye, rotate90, fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep} from "./funcs";
+import { fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep} from "./funcs";
 
 export const robot = require("robotjs");
 robot.setKeyboardDelay(1000);
@@ -22,7 +22,6 @@ export const exportToPaperPort = () => {
                 var tempPath2 = tempPath + "\\" + xRay;
                 if(isTif(tempPath2)) {
                     var newPath = appendParentNameDate(tempPath2);
-                    rotate90(tempPath2, newPath);
                     listToExportToPaperPort.push(newPath);
                     console.log("true");
                 }
@@ -166,6 +165,13 @@ export const printFiles = (listToExportToPaperPort) => {
 
     robot.mouseClick("right");
     robot.keyTap("s");
+
+    //Rotate files
+    robot.keyTap("alt");
+    robot.keyTap("i");
+    robot.keyTap("o");
+    robot.keyTap("down");
+    robot.keyTap("enter");
 }
 
 //Transfers files over to SRS
