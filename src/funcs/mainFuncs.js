@@ -35,6 +35,7 @@ export const exportToPaperPort = () => {
 
             var name = getPatientInfo();
             console.log("got name");
+            var name = getPatientInfo(listToExportToPaperPort[0]);
             storeFiles(name);
             console.log("stored");
         } 
