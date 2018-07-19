@@ -29,14 +29,25 @@ export const exportToPaperPort = () => {
                     console.log("false");
                 }
             }
-            /*
+            
             printFiles(listToExportToPaperPort);
             transferFiles();
 
             var name = getPatientInfo();
-            storeFiles(name);*/
+            storeFiles(name);
         } 
     }
+
+    const un2x = 2526;
+    const un2y = 556;
+    robot.moveMouse(un2x, un2y);
+    robot.mouseClick();
+
+    robot.keyTap("command");
+    robot.keyTap("right");
+    robot.keyTap("enter");
+
+    
 }
 
 //Turns on all the programs that will be used
@@ -66,7 +77,7 @@ export const init = () => {
     robot.keyTap("right");
     robot.keyTap("enter");
 
-    sleep(20000);
+    sleep(150000);
 
     bootSRS();
     
@@ -134,8 +145,6 @@ export const bootSRS = () => {
     robot.keyTap("enter");
 
     sleep(4000);
-
-
 
     //Insert Username
     const unx = 2396;
