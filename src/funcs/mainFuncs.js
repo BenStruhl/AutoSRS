@@ -77,10 +77,12 @@ export const init = () => {
     robot.keyTap("right");
     robot.keyTap("enter");
 
-    sleep(150000);
+    sleep(20000);
 
     bootSRS();
-    
+
+    var username = getSecrets();
+
     const srsx = 2043;
     const srsy = -67;
     robot.moveMouse(srsx, srsy);
