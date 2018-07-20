@@ -98,9 +98,9 @@ export const getMouseCoor = () => {
 // opens a new log file
 export const openLog = () => {
   var datetime = new Date();
-  var logPath = "../../logs/" + datetime.toDateString() + ".txt";
+  var logPath = path.resolve() + datetime.toDateString() + ".txt";
   fs.writeFileSync(logPath, datetime.toDateString());
-  return logPath;
+  return logPath ;
 }
 
 // writes to a log file given a path to a log
