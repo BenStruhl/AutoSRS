@@ -1,4 +1,4 @@
-import { fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep, PrintImage} from "./funcs";
+import { fs, appendParentNameDate, isTif, ImagetoPrint, selectAll, getPatientInfo, getSecrets, sleep, PrintImage, openLog, writeToLog} from "./funcs";
 
 export const robot = require("robotjs");
 robot.setKeyboardDelay(1000);
@@ -8,20 +8,25 @@ robot.setKeyboardDelay(1000);
 // exports all files in a specified folder to printport
 // to be dropped into Srs
 export const exportToPaperPort = () => {
-    
-    init();
+    var logName = openLog();
+    writeToLog(logName, "starting init");
+    init(logname);
+    writeToLog(logName, "finished init");
     const abspath = "C:\\Test";
     var listOfAllFiles = fs.readdirSync(abspath);
     for(var file of listOfAllFiles) {
+        writeToLog(logName, "accessing file " + file);
         console.log(file);
         const tempPath = abspath + "\\" + file;
         if(fs.lstatSync(tempPath).isDirectory()) {
+            writeToLog(logName, "accessing directory  " + tempPath);
             var listOfXRays = fs.readdirSync(tempPath);
             var listToExportToPaperPort = [];
             for(var xRay     of listOfXRays) {
                 var tempPath2 = tempPath + "\\" + xRay;
                 if(isTif(tempPath2)) {
                     var newPath = appendParentNameDate(tempPath2);
+                    writeToLog(logName, "accessing directory  " + tempPath2);
                     listToExportToPaperPort.push(newPath);
                     console.log("true");
                 }
@@ -30,7 +35,9 @@ export const exportToPaperPort = () => {
                 }
             }
             
+            writeToLog(logname, "starting to print files");
             printFiles(listToExportToPaperPort);
+            writeToLog(logname, "starting to transfer files");
             transferFiles();
 
             var name = getPatientInfo(listToExportToPaperPort[0]);
@@ -54,21 +61,25 @@ export const exportToPaperPort = () => {
 }
 
 //Turns on all the programs that will be used
-export const init = () => {
+export const init = (logname) => {
     sleep(5000);
     robot.keyToggle("command", "down");
     robot.keyTap("d");
     robot.keyToggle("command", "up");
 
+
     //Turn on paper port
+    writeToLog(logname, "Turning on Paperport");
     robot.keyTap("command");
     robot.typeStringDelayed("PaperPort");
     robot.keyTap("enter");
 
     sleep(10000);
-    clearPaperPort();
+    writeToLog(logname, "Clearing Paperport");
+    clearPaperPort(logname);
 
     //Boot SRS
+    writeToLog(logname, "Booting SRS");
     robot.keyToggle("command", "down");
     robot.keyTap("d");
     robot.keyToggle("command", "up");
@@ -76,6 +87,7 @@ export const init = () => {
     bootSRS();
 
     //Logout
+    writeToLog(logname, "Logging Out");
     robot.keyTap("command");
     robot.keyTap("right");
     robot.keyTap("enter");
@@ -84,6 +96,7 @@ export const init = () => {
 
     bootSRS();
 
+    writeToLog(logname, "Putting in username and password");
     var username = getSecrets();
 
     const srsx = 2043;
@@ -130,7 +143,8 @@ export const init = () => {
 }
 
 
-export const clearPaperPort = () => {
+export const clearPaperPort = (logname) => {
+    writeToLog(logname, "Clearing Paperport");
     robot.keyToggle("command", "down");
     robot.keyTap("up");
     robot.keyToggle("command", "up");
