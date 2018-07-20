@@ -43,7 +43,7 @@ export const appendParentNameDate = (pathGiven) => {
   return  pathName + "\\" + newNameToAppend + basename; 
 }
 export const PrintImage = (path) => {
-  console.log(path)
+  console.log("Printing:" + path)
   let finalPath = 'C:\\Windows\\System32\\mspaint.exe /pt ' + path + ' \"PaperPort Image Printer\"';
   exec( finalPath, (err, stdout, stderr) => {
     if (err) {
