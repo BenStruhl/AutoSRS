@@ -10,35 +10,42 @@ robot.setKeyboardDelay(1000);
 export const exportToPaperPort = () => {
     
     init();
-    const abspath = "C:\\Test";
-    var listOfAllFiles = fs.readdirSync(abspath);
-    for(var file of listOfAllFiles) {
+    const abspath = "E:\\";
+    var topLevel = fs.readdirSync(abspath);
+    for(var file of topLevel) {
         console.log(file);
-        const tempPath = abspath + "\\" + file;
-        if(fs.lstatSync(tempPath).isDirectory()) {
-            var listOfXRays = fs.readdirSync(tempPath);
-            var listToExportToPaperPort = [];
-            for(var xRay     of listOfXRays) {
-                var tempPath2 = tempPath + "\\" + xRay;
-                if(isTif(tempPath2)) {
-                    var newPath = appendParentNameDate(tempPath2);
-                    listToExportToPaperPort.push(newPath);
-                    console.log("true");
-                }
-                else{
-                    console.log("false");
-                }
-            }
-            
-            printFiles(listToExportToPaperPort);
-            transferFiles();
+        const filePath = abspath + "\\" + file;
+        if(fs.lstatSync(filePath).isDirectory() && file != "Cold Storage"){
+            for(var file of listOfAllFiles) {
+                console.log(file);
+                const tempPath = filePath + "\\" + file;
+                if(fs.lstatSync(tempPath).isDirectory()) {
+                    var listOfXRays = fs.readdirSync(tempPath);
+                    var listToExportToPaperPort = [];
+                    for(var xRay     of listOfXRays) {
+                        var tempPath2 = tempPath + "\\" + xRay;
+                        if(isTif(tempPath2)) {
+                            var newPath = appendParentNameDate(tempPath2);
+                            listToExportToPaperPort.push(newPath);
+                            console.log("true");
+                        }
+                        else{
+                            console.log("false");
+                        }
+                    }
+                    
+                    printFiles(listToExportToPaperPort);
+                    transferFiles();
 
-            var name = getPatientInfo(listToExportToPaperPort[0]);
-            console.log("got name");
+                    var name = getPatientInfo(listToExportToPaperPort[0]);
+                    console.log("got name");
 
-            storeFiles(name);
-            console.log("stored");
-        } 
+                    storeFiles(name);
+                    console.log("stored");
+                } 
+            }   
+        }
+        fs.renameSync(filePath, "E:\\Cold Storage\\" + file);
     }
 
     const un2x = 2526;
