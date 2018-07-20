@@ -99,7 +99,7 @@ export const getMouseCoor = () => {
 export const openLog = () => {
   var datetime = new Date();
   var logPath = "../../logs/" + datetime.toDateString() + ".txt";
-  fs.writeSync(logPath, datetime.toDateString());
+  fs.writeFileSync(logPath, datetime.toDateString());
   return logPath;
 }
 
