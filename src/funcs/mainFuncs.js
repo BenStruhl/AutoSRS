@@ -10,14 +10,14 @@ robot.setKeyboardDelay(1000);
 export const exportToPaperPort = () => {
     var logName = openLog();
     writeToLog(logName, "starting init");
-    init();
-    const abspath = "E:\\";
+    init(logName);
+    const abspath = "C:\\Test";
     var topLevel = fs.readdirSync(abspath);
     for(var file of topLevel) {
         writeToLog(logName, "accessing file " + file);
         console.log(file);
         const filePath = abspath + "\\" + file;
-        if(fs.lstatSync(filePath).isDirectory() && file != "Cold Storage"){
+        if(fs.lstatSync(filePath).isDirectory() && !(file === "Cold Storage")){
             for(var file of listOfAllFiles) {
                 writeToLog(logName, "accessing directory  " + tempPath);
                 console.log(file);
@@ -51,7 +51,7 @@ export const exportToPaperPort = () => {
                 } 
             }   
         }
-        fs.renameSync(filePath, "E:\\Cold Storage\\" + file);
+        fs.renameSync(filePath, "C:\\Test\\Cold Storage\\" + file);
     }
 
     const un2x = 2526;
@@ -68,6 +68,7 @@ export const exportToPaperPort = () => {
 
 //Turns on all the programs that will be used
 export const init = (logname) => {
+    console.log(logname);
     sleep(5000);
     robot.keyToggle("command", "down");
     robot.keyTap("d");
