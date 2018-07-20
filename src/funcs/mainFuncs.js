@@ -11,7 +11,7 @@ export const exportToPaperPort = () => {
     var logName = openLog();
     writeToLog(logName, "starting init");
     init(logName);
-    const abspath = "C:\\Test";
+    const abspath = "E:\\";
     var topLevel = fs.readdirSync(abspath);
     for(var folder of topLevel) {
         writeToLog(logName, "accessing file " + folder);
@@ -52,7 +52,7 @@ export const exportToPaperPort = () => {
                     console.log("stored");
                 } 
             }   
-            fs.renameSync(filePath, "C:\\Test\\Cold Storage\\" + folder);
+            fs.renameSync(filePath, "C:\\Cold Storage\\" + folder);
         }
     }
 
