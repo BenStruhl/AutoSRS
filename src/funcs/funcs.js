@@ -106,6 +106,6 @@ export const openLog = () => {
 
 // writes to a log file given a path to a log
 export const writeToLog = (path, data) => {
-  fs.appendFileSync(path, data + "\n");
+  fs.appendFileSync(path, "\n" + data);
   return true;
 }

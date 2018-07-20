@@ -13,34 +13,36 @@ export const exportToPaperPort = () => {
     init(logName);
     const abspath = "C:\\Test";
     var topLevel = fs.readdirSync(abspath);
-    for(var file of topLevel) {
-        writeToLog(logName, "accessing file " + file);
-        console.log(file);
-        const filePath = abspath + "\\" + file;
-        if(fs.lstatSync(filePath).isDirectory() && !(file === "Cold Storage")){
+    for(var folder of topLevel) {
+        writeToLog(logName, "accessing file " + folder);
+        const filePath = abspath + "\\" + folder;
+        console.log(folder);
+        if(fs.lstatSync(filePath).isDirectory() && !(folder === "Cold Storage")){
+            var listOfAllFiles = fs.readdirSync(filePath);
+            writeToLog(logName, "accessing directory " + filePath);
             for(var file of listOfAllFiles) {
-                writeToLog(logName, "accessing directory  " + tempPath);
                 console.log(file);
                 const tempPath = filePath + "\\" + file;
                 if(fs.lstatSync(tempPath).isDirectory()) {
-                    writeToLog(logName, "accessing directory  " + tempPath);                    
+                    writeToLog(logName, "accessing directory " + tempPath);                    
                     var listOfXRays = fs.readdirSync(tempPath);
                     var listToExportToPaperPort = [];
-                    for(var xRay     of listOfXRays) {
+                    for(var xRay of listOfXRays) {
                         var tempPath2 = tempPath + "\\" + xRay;
                         if(isTif(tempPath2)) {
                             var newPath = appendParentNameDate(tempPath2);
-                            writeToLog(logName, "accessing directory  " + tempPath2);
+                            writeToLog(logName, "accessing file  " + tempPath2);
                             listToExportToPaperPort.push(newPath);
                             console.log("true");
+                            console.log(newPath);
                         }
                         else{
                             console.log("false");
                         }
                     }
-                    writeToLog(logname, "starting to print files");
+                    writeToLog(logName, "starting to print files");
                     printFiles(listToExportToPaperPort);
-                    writeToLog(logname, "starting to transfer files");
+                    writeToLog(logName, "starting to transfer files");
                     transferFiles();
 
                     var name = getPatientInfo(listToExportToPaperPort[0]);
@@ -50,8 +52,8 @@ export const exportToPaperPort = () => {
                     console.log("stored");
                 } 
             }   
+            fs.renameSync(filePath, "C:\\Test\\Cold Storage\\" + folder);
         }
-        fs.renameSync(filePath, "C:\\Test\\Cold Storage\\" + file);
     }
 
     const un2x = 2526;
@@ -132,10 +134,11 @@ export const init = (logname) => {
     robot.moveMouse(spx, spy);
     robot.mouseClick();
 
-    sleep(5000);
+    sleep(7500);
     const fix = 2355;
     const fiy = 142;
     robot.moveMouse(fix, fiy);
+    robot.mouseClick();
     selectAll();
     sleep(500);
     robot.keyTap("delete");
