@@ -28,7 +28,8 @@ const osMap = {
 };
 
 getSecrets();
-document.querySelector("#testButton").addEventListener("click", exportToPaperPort);  
+exportToPaperPort();
+// document.querySelector("#testButton").addEventListener("click", exportToPaperPort);  
 // document.querySelector("#mainImage").setAttribute("src","./test_files/spiderCrab.jpg");
 document.querySelector("#app").style.display = "block";
 document.querySelector("#greet").innerHTML = greet();

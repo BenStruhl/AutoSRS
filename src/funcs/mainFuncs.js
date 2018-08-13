@@ -77,11 +77,7 @@ export const init = (logname) => {
     robot.keyToggle("command", "up");
 
 
-    //Turn on paper port
-    writeToLog(logname, "Turning on Paperport");
-    robot.keyTap("command");
-    robot.typeStringDelayed("PaperPort");
-    robot.keyTap("enter");
+    startPaperPort(logname);
 
     sleep(10000);
     writeToLog(logname, "Clearing Paperport");
@@ -152,9 +148,22 @@ export const init = (logname) => {
     robot.mouseClick();
 }
 
+export const startPaperPort = (logname) => {
+    //Turn on paper port
+    writeToLog(logname, "Turning on Paperport");
+    robot.keyTap("command");
+    robot.typeStringDelayed("PaperPort");
+    robot.keyTap("enter");
+}
 
 export const clearPaperPort = (logname) => {
     writeToLog(logname, "Clearing Paperport");
+
+    robot.keyToggle("alt", "down");
+    robot.keyTap("tab");
+    robot.keyTap("left");
+    robot.keyToggle("alt", "up");
+
     robot.keyToggle("command", "down");
     robot.keyTap("up");
     robot.keyToggle("command", "up");
